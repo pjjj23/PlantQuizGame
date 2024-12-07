@@ -1,0 +1,378 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+
+body {
+  background: url("../images/w&b.jpg") no-repeat center top fixed;
+  background-size: cover;
+  color: #f2f2f2;
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* General Font & Color Settings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Exo 2", sans-serif;
+  margin: 2rem 0;
+  color: #f2f2f2;
+}
+
+p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+  color: #f2f2f2;
+}
+
+h2 span {
+  padding: 1rem;
+  background: #f2f2f2;
+  font-size: 2rem;
+  color: #141A40;
+}
+
+/* Navbar */
+#logo {
+  width: 70px;
+  height: 70px;
+}
+
+.qz-navbar {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  margin-bottom: 5rem;
+}
+
+.qz-navbar i {
+  font-size: 3rem;
+  color: #f2f2f2;
+}
+
+button i:hover {
+  transition: color 0.3s ease;
+  color: #F2B90F;
+}
+
+/* Game HUD & Settings */
+#gameDashboard {
+  margin-top: 7rem;
+}
+
+.qz-hud {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background: rgba(242, 185, 15, 0.8);
+  background-clip: content-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.qz-hud h2 {
+  background-color: rgba(250, 250, 250, 0.3);
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+}
+
+select {
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 180px;
+  padding: 5px 10px;
+  border: 2px solid #011526;
+  border-radius: 5%;
+  background: #F2B90F;
+}
+
+/* Start Button */
+#start,
+#start:active {
+  border: 2px solid #011526;
+  font-size: 2rem;
+  width: 15rem;
+  height: 4rem;
+  background-color: #F2B90F;
+  color: #000;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s ease;
+}
+
+#start:hover,
+#start:focus {
+  border-color: #F2B90F;
+  box-shadow: 0 0 1.5rem rgba(210, 29, 242, 0.6);
+}
+
+/* Progress Bar */
+.progress-wraper {
+  max-width: 80%;
+  margin: 0 auto 2rem;
+  height: 3rem;
+  border: 1px solid #000;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.qz-progress-bar {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 0%;
+  background-color: #7957F2;
+  border-radius: 1.5rem;
+}
+
+/* Score and High Score Display */
+.hScore {
+  display: inline-block;
+  font-size: 2.4rem;
+  color: #F2f2f2;
+}
+
+#score {
+  height: 7rem;
+  line-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  background-color: #F2B90F;
+  padding: 0.5rem;
+  border: 2px solid #011526;
+}
+
+#currentScore {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+#userName {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 2.4rem;
+}
+
+#highScore {
+  font-size: 2.4rem;
+  color: #ffc107;
+}
+
+/* Questions & Answers */
+.answers-container {
+  display: flex;
+  padding-left: 0;
+  margin: 0 1rem 1rem 1rem;
+  border-radius: 1.5rem;
+  width: 100%;
+  border: 0.2rem solid #141A40;
+  background-color: #F2B90F;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.answers-container:hover {
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.25em);
+}
+
+.answer-choice {
+  padding: 1rem 0rem 1rem 2rem;
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #141A40;
+}
+
+.answer-prefix {
+  display: flex;
+  border-radius: 1.2rem;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  background-color: #f2f2f2;
+  border-right: 0.2rem solid #011526;
+}
+
+#game {
+  padding: 2rem;
+  margin: 0 1rem;
+}
+
+#question {
+  background: #7957F2;
+  padding: 1rem;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  font-size: 2.2rem;
+  color: #f2f2f2;
+}
+
+/* Icons and Links */
+i, a {
+  color: #141A40;
+  font-size: 3rem;
+  transition: color 0.3s ease;
+}
+
+i:hover, a:hover {
+  color: #7957F2;
+}
+
+/* Modals */
+.qz-Modal--bg {
+  background: rgba(242, 185, 15, 0.9);
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#playerModal label {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: #141A40;
+}
+
+#user {
+  font-family: "Exo 2", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #7957F2;
+  background-color: #011526;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.qz-Modal--content {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #141A40;
+}
+
+.qz-Modal--content p {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+#underline {
+  font-size: 2rem;
+  text-decoration: underline;
+  color: #7957F2;
+}
+
+#submitName {
+  font-size: 2rem;
+  border: 1px solid #fff;
+  background-color: #011526;
+  color: #f2f2f2;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+#submitName:hover {
+  color: #7957F2;
+  border-color: #7957F2;
+}
+
+button.close span {
+  color: #141A40;
+  font-weight: 800;
+  font-family: "Open Sans", sans-serif;
+  font-size: 2.5rem;
+}
+
+button.close {
+  opacity: 1;
+  padding-top: 0.5rem;
+}
+
+button.close span:hover {
+  color: #8b0017;
+}
+
+button.close:focus {
+  outline: none;
+}
+
+/* Footer */
+.copy p {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #f2f2f2;
+  text-align: center;
+}
+
+.mail i, .mail span {
+  color: #f2f2f2;
+  font-size: 2rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mail span:hover, .mail a:hover {
+  color: #7957F2;
+}
+
+.GitHub i {
+  color: #f2f2f2;
+}
+
+.GitHub i:hover, .mail i:hover {
+  font-size: 4rem;
+  color: #7957F2;
+}
+
+/* Utility Classes */
+.hideBtn {
+  visibility: hidden;
+}
+
+.correct {
+  background-color: #47bd11;
+}
+
+.incorrect {
+  background-color: #8b0017;
+}
+
+.display {
+  display: none;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+/* Media Queries */
+@media screen and (max-width: 350px) {
+  .col-12 {
+    padding: 0;
+  }
+  .progress-wraper {
+    max-width: 100%;
+    margin-left: 0;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  #game {
+    padding: 0;
+    width: 100%;
+  }
+  #question {
+    margin: 1rem 0;
+    font-size: 1.8rem;
+  }
+  #qz-footer {
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 351px) {
+  .title span {
+    font-size: 3rem;
+    background-clip: content-box;
+  }
+}

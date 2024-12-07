@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora Quiz - Instructions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --secondary-color: #3f51b5;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('path/to/your/background-image.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0.1;
+            transition: opacity 0.5s ease;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header:hover {
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        } 
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .main-content {
+            padding: 70px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 36px;
+            margin-bottom: 50px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .instruction-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.5s ease;
+        }
+
+        .instruction-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+ 
+        .instruction-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .instruction-card h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .instruction-card:hover h2 {
+            transform: translateX(10px);
+        }
+
+        .instruction-card p {
+            font-size: 16px;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+        }
+
+        .instruction-card:hover p {
+            transform: translateX(5px);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0px); }
+        }
+
+        .instruction-icon {
+            font-size: 48px;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
+        }
+
+        .instruction-card:hover .instruction-icon {
+            animation: float 2s ease-in-out infinite;
+            color: var(--primary-color);
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #backToTop:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 80px;
+            }
+
+            header {
+                padding: 15px 5%;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .main-content {
+                padding: 40px 5%;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .instruction-card h2 {
+                font-size: 20px;
+            }
+
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: var(--card-bg);
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+                padding: 15px 0;
+                justify-content: space-around;
+            }
+
+            .mobile-nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-size: 24px;
+                transition: all 0.3s ease;
+            }   
+        }
+        .active{
+            color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <audio id="backgroundAudio" loop>
+        <source src="assets/audio/audio-bg-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio> 
+    <button id="toggleAudioButton" style="position: fixed; bottom: 70px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: var(--primary-color); color: white; border: none; cursor: pointer;">🔇</button>
+    <header>
+        <div class="logo">Flora Quiz</div>
+        <nav>
+            <a href="home.php"><i class="fas fa-home"></i> Home</a>
+            <a href="quizplay.php"><i class="fas fa-play"></i> Quiz Play</a>
+            <a href="instruction.html" class="active"><i class="fas fa-book"></i> Instruction</a> 
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h1>How to Play Flora Quiz</h1>
+
+        <div class="instruction-card">
+            <i class="fas fa-user-plus instruction-icon"></i>
+            <h2>1. Create an Account</h2>
+            <p>Sign up for a free account to start playing and tracking your progress.</p>
+        </div>
+
+        <div class="instruction-card">
+            <i class="fas fa-list-alt instruction-icon"></i>
+            <h2>2. Choose a Category</h2>
+            <p>Select from a variety of plant-related categories to test your knowledge.</p>
+        </div>
+
+        <div class="instruction-card">
+            <i class="fas fa-question-circle instruction-icon"></i>
+            <h2>3. Answer Questions</h2>
+            <p>Read each question carefully and select the best answer from the options provided.</p>
+        </div>
+
+        <div class="instruction-card">
+            <i class="fas fa-clock instruction-icon"></i>
+            <h2>4. Beat the Clock</h2>
+            <p>Answer as many questions as you can within the time limit to earn more points.</p>
+        </div>
+
+        <div class="instruction-card">
+            <i class="fas fa-trophy instruction-icon"></i>
+            <h2>5. Earn Points and Climb the Leaderboard</h2>
+            <p>Accumulate points for correct answers and compete with other players for the top spot.</p>
+        </div>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="home.php"><i class="fas fa-home"></i></a>
+        <a href="quizplay.php"><i class="fas fa-play"></i></a>
+        <a href="instruction.html"><i class="fas fa-book"></i></a> 
+    </nav>
+
+    <button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.instruction-card');
+    
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function handleScroll() {
+        cards.forEach(card => {
+            if (isElementInViewport(card)) {
+                card.classList.add('visible');
+            }
+        });
+    }
+
+    // Initial check
+    handleScroll();
+
+    // Check on scroll
+    window.addEventListener('scroll', handleScroll);
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Initial check
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Parallax effect
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const background = document.querySelector('body::before');
+                background.style.transform = 'translateY(' + (scrolled * 0.3) + 'px)';
+            });
+
+            // Back to Top button functionality
+            let backToTopButton = document.getElementById("backToTop");
+
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            }
+
+            backToTopButton.addEventListener("click", function(){
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        });
+
+        //for the background music
+
+        let audioWorker;
+
+  function initAudio() {
+    audioWorker = new Worker('audioWorker.js');
+    audioWorker.postMessage({ action: 'init', audioSrc: 'assets/audio/audio-bg-1.mp3' });
+  }
+
+  function toggleAudio() {
+    if (localStorage.getItem('audioPlaying') === 'true') {
+      audioWorker.postMessage({ action: 'pause' });
+      localStorage.setItem('audioPlaying', 'false');
+      updateButtonText('🔇');
+    } else {
+      audioWorker.postMessage({ action: 'play' });
+      localStorage.setItem('audioPlaying', 'true');
+      updateButtonText('🔊');
+    }
+  }
+
+  function updateButtonText(text) {
+    document.getElementById('toggleAudioButton').innerHTML = text;
+  }
+
+  const audio = document.getElementById('backgroundAudio');
+const toggleButton = document.getElementById('toggleAudioButton');
+
+function toggleAudio() {
+    if (audio.paused) {
+        audio.play();
+        localStorage.setItem('audioPlaying', 'true');
+        toggleButton.textContent = '🔊';
+    } else {
+        audio.pause();
+        localStorage.setItem('audioPlaying', 'false');
+        toggleButton.textContent = '🔇';
+    }
+}
+
+toggleButton.addEventListener('click', toggleAudio);
+
+// Check localStorage on page load
+window.addEventListener('load', () => {
+    const audioPlaying = localStorage.getItem('audioPlaying');
+    const audioTime = localStorage.getItem('audioTime');
+    
+    if (audioPlaying === 'true') {
+        audio.currentTime = parseFloat(audioTime) || 0;
+        audio.play();
+        toggleButton.textContent = '🔊';
+    }
+});
+
+// Store audio time before unload
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem('audioTime', audio.currentTime);
+});
+    </script>
+</body>
+</html>

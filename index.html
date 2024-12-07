@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora Quiz: Ornamental Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        #loading-container {
+            width: 80%;
+            max-width: 300px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #loading-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            transition: width 3s ease-in-out;
+        }
+
+        #logo-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            transform: translateY(20px);
+        }
+
+        #logo {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        #quiz-title {
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            color: #4a4a4a;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        #tap-to-start {
+            display: none;
+            font-size: 36px;
+            font-weight: 600;
+            cursor: pointer;
+            animation: blink 2s infinite, float 3s ease-in-out infinite;
+            color: #4a4a4a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-container">
+        <div id="loading-bar"></div>
+    </div>
+    <div id="logo-container">
+        <img id="logo" src="assets/images/yoga-1805784_640.png" alt="Logo">
+        <div id="quiz-title">Flora Quiz: Ornamental Edition</div>
+    </div>
+    <div id="tap-to-start">Tap to Start</div>
+
+    <script>
+        const loadingBar = document.getElementById('loading-bar');
+        const logoContainer = document.getElementById('logo-container');
+        const tapToStart = document.getElementById('tap-to-start');
+        const loadingContainer = document.getElementById('loading-container');
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.style.left = Math.random() * window.innerWidth + 'px';
+            flower.style.top = Math.random() * window.innerHeight + 'px';
+            flower.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="%23${Math.floor(Math.random()*16777215).toString(16)}"/><circle cx="50" cy="50" r="20" fill="%23fff"/></svg>')`;
+            document.body.appendChild(flower);
+        }
+        loadingContainer.style.display = 'block';
+        loadingBar.style.width = '0%';
+        setTimeout(() => {
+            loadingBar.style.width = '100%';
+        }, 100);
+        for (let i = 0; i < 10; i++) {
+            createFlower();
+        }
+
+        setTimeout(() => {
+            loadingBar.style.width = '100%';
+        }, 100);
+
+        setTimeout(() => {
+            loadingContainer.style.display = 'none';
+            logoContainer.style.display = 'flex';
+            logoContainer.style.opacity = '1';
+            logoContainer.style.transform = 'translateY(0)';
+        }, 3100);
+
+        setTimeout(() => {
+            logoContainer.style.opacity = '0';
+            logoContainer.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                logoContainer.style.display = 'none';
+                tapToStart.style.display = 'block';
+            }, 1000);
+        }, 5000);
+
+        tapToStart.addEventListener('click', () => {
+            window.location.href = 'notLogged-home.html';
+        });
+    </script>
+</body>
+</html>

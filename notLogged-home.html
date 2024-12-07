@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --secondary-color: #3f51b5;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        header {
+            background-color: var(--card-bg);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 700;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            padding: 80px 5%;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .text-content {
+            max-width: 50%;
+            color: #e91e63;
+        }
+        .text-content h1{ 
+            color: #e91e63;
+        }
+        h1 {
+            color: var(--secondary-color);
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        p {
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .cta-button, .secondary-button {
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            margin-right: 15px;
+        }
+        .secondary-button {
+            background-color: #dfe6e9;
+            color: #2d3436;
+        }
+        .cta-button:hover, .secondary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            opacity: 0.9;
+        }
+        .button-icon {
+            margin-right: 10px;
+        }
+        .image-content {
+            position: relative;
+            width: 500px;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slider-image.active {
+            opacity: 1;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
+        }
+        .mobile-nav {
+            display: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--bg-color);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        nav a, .dropdown .dropbtn {
+            margin-left: 30px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, .dropdown .dropbtn:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-nav .dropdown {
+            position: relative;
+        }
+
+        .mobile-nav .dropdown-content {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background-color: var(--card-bg);
+            min-width: 180px;
+            box-shadow: 0px -8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .mobile-nav .dropdown.active .dropdown-content {
+            display: block;
+        }
+
+        .mobile-nav .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-nav .dropdown-content a:hover {
+            background-color: var(--bg-color);
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .popup-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .popup-card h2 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .popup-card p {
+            color: var(--text-color);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .popup-card button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-card button i {
+            margin-right: 10px;
+        }
+
+        .popup-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gamer-login-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .admin-login-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown {
+                position: static; 
+            }
+            .dropdown-content {
+                position: fixed;
+                bottom: 70px;
+                left: -200%;
+                right: 0;
+                width: 100%; 
+                border-radius: 0; 
+            }
+
+            .mobile-nav .dropdown-content {
+                display: none;
+            }
+
+            .mobile-nav .dropdown.active .dropdown-content {
+                display: block;
+            }
+            body {
+                padding-bottom: 70px;
+            }
+            header {
+                padding: 15px 5%;
+            }
+            nav {
+                display: none;
+            }
+            .main-content {
+                flex-direction: column;
+                padding: 40px 5%;
+            }
+            .text-content {
+                max-width: 100%;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            p {
+                font-size: 16px;
+            }
+            .image-content {
+                width: 100%;
+                height: 300px;
+            }
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: var(--card-bg);
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                padding: 10px 0;
+                justify-content: space-around;
+            }
+            .mobile-nav a {
+                color: var(--text-color);
+                text-decoration: none;
+                font-size: 24px;
+            }
+            .mobile-nav a:hover {
+                color: var(--primary-color);
+            }
+        }
+  
+        #first-time-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #first-time-overlay.hidden {
+            display: none;
+        }
+
+        #animated-cursor {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .instruction-button-highlight {
+            position: relative;
+            z-index: 2001;
+            animation: glowEffect 2s infinite alternate;
+        }
+
+        @keyframes glowEffect {
+            from {
+                box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
+            }
+            to {
+                box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+            }
+        }
+
+        #instruction-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 2002;
+            text-align: center;
+            display: none;
+        }
+
+        #instruction-popup button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <audio id="backgroundAudio" loop>
+    <source src="assets/audio/audio-bg-1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<button id="toggleAudioButton" style="position: fixed; bottom: 70px; left: 20px; z-index: 1000; padding: 10px; border-radius: 50%; background: var(--primary-color); color: white; border: none; cursor: pointer;">🔇</button>
+ 
+    <header>
+        <div class="logo">Flora Quiz</div>
+        <nav>
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <a href="#"><i class="fas fa-play"></i> Quiz Play</a>
+            <a href="notLogged-instruction.html" class="secondary-button" style="background: none;"><i class="fas fa-book"></i> Instruction</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn"><i class="fas fa-ellipsis-h"></i> More</a>
+                <div class="dropdown-content">
+                    <a href="user-login.php" class="secondary-button"><i class="fas fa-user"></i> Login as Gamer</a>
+                    <a href="admin-login.php" class="secondary-button"><i class="fas fa-user-shield"></i> Login as Admin</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="popup-overlay">
+        <div class="popup-card">
+            <i class="fas fa-exclamation-circle popup-icon"></i>
+            <h2>Login Required</h2>
+            <p>Please log in to continue</p>
+            <button class="gamer-login-btn" onclick="window.location.href='user-login.php'">
+                <i class="fas fa-gamepad"></i> Gamer Login
+            </button>
+            <button class="admin-login-btn" onclick="window.location.href='admin-login.php'">
+                <i class="fas fa-user-shield"></i> Admin Login
+            </button>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="text-content">
+            <h1>Lots Of Quizzes, Lots Of Categories</h1>
+            <p>Compete in exciting quizzes, climb global leaderboards, and customize your challenge with various categories and difficulties. Expand your knowledge and become a plant expert while battling for the top spot.</p>
+            <a href="quizplay.php" class="cta-button"><i class="fas fa-play-circle button-icon"></i>Let's Play</a>
+            <a href="#" class="secondary-button"><i class="fa-solid fa-trophy"></i> Leaderboards</a>
+        </div>
+        <div class="image-content">
+            <img src="assets/images/quizDisplay1.png" alt="Quiz Illustration 1" class="slider-image active">
+            <img src="assets/images/quizDisplay2.png" alt="Quiz Illustration 2" class="slider-image">
+            <img src="assets/images/quizDisplay3.png" alt="Quiz Illustration 3" class="slider-image">
+            <div class="slider-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+        </div>
+    </div>
+    <div id="first-time-overlay" class="hidden">
+        <div id="animated-cursor"></div>
+    </div>
+
+    <div id="instruction-popup">
+        <p>Read our rules/instructions here.</p>
+        <button id="okay-button" style="display: none;">Okay</button>
+    </div>
+    <nav class="mobile-nav">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <a href="#"><i class="fas fa-play"></i></a>
+        <a href="notLogged-instruction.html" class="secondary-button" style="background: none;"><i class="fas fa-book"></i></a>
+        <div class="dropdown">
+            <a href="#" class="more-btn"><i class="fas fa-ellipsis-h"></i></a>
+            <div class="dropdown-content">
+                <a href="user-login.php" class="secondary-button"><i class="fas fa-user"></i> Login as Gamer</a>
+                <a href="admin-login.php" class="secondary-button"><i class="fas fa-user-shield"></i> Login as Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        const images = document.querySelectorAll('.slider-image');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            images.forEach(img => img.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            images[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }
+
+        setInterval(nextImage, 3000);
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                showImage(index);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const moreButton = document.querySelector('.mobile-nav .more-btn');
+            const dropdown = document.querySelector('.mobile-nav .dropdown');
+
+            moreButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!dropdown.contains(e.target) && !moreButton.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const popupOverlay = document.querySelector('.popup-overlay');
+            const buttons = document.querySelectorAll('a:not([href="#"]):not(.dropbtn):not(.more-btn):not(.secondary-button)');
+            const leaderboardButton = document.querySelector('a.secondary-button[href="#"]');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                });
+            });
+
+            if (leaderboardButton) {
+                leaderboardButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                });
+            }
+
+            popupOverlay.addEventListener('click', function(e) {
+                if (e.target === popupOverlay) {
+                    popupOverlay.style.display = 'none';
+                }
+            });
+
+            const loginButtons = popupOverlay.querySelectorAll('button');
+            loginButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    // Here you can add any additional logic for login buttons if needed
+                });
+            });
+        });
+
+         //for the background music
+
+         let audioWorker;
+
+function initAudio() {
+  audioWorker = new Worker('audioWorker.js');
+  audioWorker.postMessage({ action: 'init', audioSrc: 'assets/audio/audio-bg-1.mp3' });
+}
+
+function toggleAudio() {
+  if (localStorage.getItem('audioPlaying') === 'true') {
+    audioWorker.postMessage({ action: 'pause' });
+    localStorage.setItem('audioPlaying', 'false');
+    updateButtonText('🔇');
+  } else {
+    audioWorker.postMessage({ action: 'play' });
+    localStorage.setItem('audioPlaying', 'true');
+    updateButtonText('🔊');
+  }
+}
+
+function updateButtonText(text) {
+  document.getElementById('toggleAudioButton').innerHTML = text;
+}
+
+const audio = document.getElementById('backgroundAudio');
+const toggleButton = document.getElementById('toggleAudioButton');
+
+function toggleAudio() {
+  if (audio.paused) {
+      audio.play();
+      localStorage.setItem('audioPlaying', 'true');
+      toggleButton.textContent = '🔊';
+  } else {
+      audio.pause();
+      localStorage.setItem('audioPlaying', 'false');
+      toggleButton.textContent = '🔇';
+  }
+}
+
+toggleButton.addEventListener('click', toggleAudio);
+
+// Check localStorage on page load
+window.addEventListener('load', () => {
+  const audioPlaying = localStorage.getItem('audioPlaying');
+  const audioTime = localStorage.getItem('audioTime');
+  
+  if (audioPlaying === 'true') {
+      audio.currentTime = parseFloat(audioTime) || 0;
+      audio.play();
+      toggleButton.textContent = '🔊';
+  }
+});
+
+// Store audio time before unload
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('audioTime', audio.currentTime);
+});
+
+    //for cursor instruction animation
+    document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('firstVisit')) {
+                const overlay = document.getElementById('first-time-overlay');
+                const cursor = document.getElementById('animated-cursor');
+                const instructionButton = document.querySelector('a[href="notLogged-instruction.html"]');
+                const mobileInstructionButton = document.querySelector('.mobile-nav a[href="notLogged-instruction.html"]');
+                const popup = document.getElementById('instruction-popup');
+                const okayButton = document.getElementById('okay-button');
+                
+                overlay.classList.remove('hidden');
+                instructionButton.classList.add('instruction-button-highlight');
+                if (mobileInstructionButton) {
+                    mobileInstructionButton.classList.add('instruction-button-highlight');
+                }
+                
+                let targetElement = window.innerWidth <= 768 ? mobileInstructionButton : instructionButton;
+                const buttonRect = targetElement.getBoundingClientRect();
+                const targetX = buttonRect.left + buttonRect.width / 2;
+                const targetY = buttonRect.top + buttonRect.height / 2;
+                
+                cursor.style.left = '50%';
+                cursor.style.top = '50%';
+                
+                setTimeout(() => {
+                    cursor.style.transition = 'all 2s ease-in-out';
+                    cursor.style.left = `${targetX}px`;
+                    cursor.style.top = `${targetY}px`;
+                }, 1000);
+                
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    instructionButton.classList.remove('instruction-button-highlight');
+                    if (mobileInstructionButton) {
+                        mobileInstructionButton.classList.remove('instruction-button-highlight');
+                    }
+                    popup.style.display = 'block';
+                }, 4000);
+                
+                setTimeout(() => {
+                    okayButton.style.display = 'inline-block';
+                }, 7000);
+                
+                okayButton.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                });
+                
+                localStorage.setItem('firstVisit', 'true');
+            }
+        });
+    </script>
+</body>
+</html>
